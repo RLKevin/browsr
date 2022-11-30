@@ -1,6 +1,6 @@
 <script>
     
-    import { getSubreddits, getSubredditList } from '../lib/reddit.js';
+    import { getPosts } from '../../../lib/reddit.js';
     // import TimeAgo from 'javascript-time-ago'
 
     // // English.
@@ -10,44 +10,21 @@
 
     // // Create formatter (English).
     // const timeAgo = new TimeAgo('en-US')
+
+    export let data;
+    let id = data.id;
     
-    let formValue = 'all';
-    let posts, subreddits = [];
+    let posts = [];
 
-    let subredditsPromise = getSubredditList().then(data => {
-        subreddits = data;
-        console.log(subreddits);
-    });
-
-    let promise = getSubreddits().then(data => {
+    let promise = getPosts(id).then(data => {
         posts = data;
+        // console.log(posts);
     });
-
-    function handleOnSubmit(event) {
-        console_log('form submitted to: ' + formValue);
-    }
 
 </script>
 
 <section class="title">
-    <h1>RSS feed</h1>
-</section>
-
-<section class="picker">
-    <form action="./r/{formValue}">
-        <input bind:value={formValue} type="text" list="subreddits" placeholder="Enter Here" />
-            {#await subredditsPromise}
-                <span class="spinner"></span>
-            {:then number}
-            <datalist id="subreddits">
-                {#each subreddits as subreddit}
-                    <option value="{subreddit}">{subreddit}</option>
-                {/each}
-            </datalist>
-        {:catch error}
-            <p style="color: red">{error.message}</p>
-        {/await}
-    </form>
+    <h1>{data.id}</h1>
 </section>
 
 <section class="posts">

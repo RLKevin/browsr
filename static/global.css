@@ -43,6 +43,55 @@ body {
 	font-family: 'Roboto', sans-serif;
 	background-color: var(--cl-bg);
 	color: var(--cl-fg);
+	line-height: 1.4;
+}
+
+span.spinner {
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	border: 8px solid var(--cl-accent);
+	border-radius: 50%;
+	border-top-color: transparent;
+	transform-origin: top left;
+	animation: spin 1s linear infinite;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+	to {
+		rotate: 360deg;
+	}
+}
+
+a {
+	color: var(--cl-accent);
+	text-decoration: none;
+}
+
+ul,
+ol {
+	margin-left: var(--padding);
+}
+
+section.title {
+	padding: var(--padding);
+	font-size: 1em;
+	text-align: center;
+	width: 100%;
+}
+
+section.posts {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+	grid-template-rows: masonry;
+	gap: var(--padding);
+	padding: var(--padding);
 }
 
 .card {
@@ -53,15 +102,16 @@ body {
 	border-radius: var(--br);
 	overflow: hidden;
 	/* padding: var(--padding); */
-	margin: var(--padding);
 	text-decoration: none;
 	color: var(--cl-fg);
+	height: auto;
+	margin-bottom: auto;
 }
 
 .card .media {
 	position: relative;
 	width: 100%;
-	background-color: #14a37f;
+	background-color: var(--cl-bg-alt2);
 	overflow: hidden;
 	border-radius: var(--br) var(--br) 0 0;
 }
@@ -70,11 +120,12 @@ body {
 .card .media video {
 	display: block;
 	width: 100%;
+	max-height: 80vh;
 	height: auto;
-	object-fit: cover;
+	object-fit: contain;
 }
 
-.card .content {
+.content {
 	display: flex;
 	flex-direction: column;
 	gap: var(--padding);
@@ -89,7 +140,7 @@ body {
 	gap: var(--padding);
 }
 
-.card .footer {
+.footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -112,4 +163,32 @@ span.flair {
 span.subreddit {
 	font-size: 0.75em;
 	color: var(--cl-fg-alt);
+}
+
+section.post {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--cl-bg-alt);
+}
+
+section.comments {
+	display: flex;
+	flex-direction: column;
+	gap: var(--padding);
+	padding: var(--padding);
+}
+
+.comment {
+	display: flex;
+	flex-direction: column;
+	gap: var(--padding);
+}
+
+.comment .op {
+	background-color: var(--cl-accent);
+	color: var(--cl-accent-text);
+}
+
+.comment .author {
+	font-weight: bold;
 }
