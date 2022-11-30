@@ -1,14 +1,16 @@
 {
 	"name": "browsr",
 	"version": "0.0.1",
-	"private": true,
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@fontsource/fira-mono": "^4.5.0",
+		"@neoconfetti/svelte": "^1.0.0",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.81",
 		"@sveltejs/kit": "next",
 		"svelte": "^3.53.1",
 		"vite": "^3.2.4"

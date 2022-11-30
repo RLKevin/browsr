@@ -1,0 +1,115 @@
+:root {
+	--accent: #1de9b6;
+	--link: #14a37f;
+	--br: 8px;
+	--padding: 16px;
+}
+
+/* colors */
+:root {
+	--cl-fg: #fff;
+	--cl-fg-alt: #fffff80;
+	--cl-bg: #212121;
+	--cl-bg-alt: #333;
+	--cl-bg-alt2: rgb(56, 56, 56);
+	--cl-accent: #1de9b6;
+	--cl-accent-2: #14a37f;
+	--cl-accent-text: #000;
+	--cl-warning: rgb(255, 0, 0, 0.2);
+	--cl-warning-text: #212121;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--cl-fg: #212121;
+		--cl-fg-alt: #21212180;
+		--cl-bg: #fff;
+		--cl-bg-alt: #f5f5f5;
+		--cl-bg-alt2: #eeeeee;
+		--cl-accent: #1de9b6;
+		--cl-accent-text: #000;
+		--cl-warning: rgb(255, 0, 0, 0.2);
+		--cl-warning-text: #212121;
+	}
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: var(--cl-bg);
+	color: var(--cl-fg);
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	/* gap: 16px; */
+	background-color: var(--cl-bg-alt);
+	border-radius: var(--br);
+	overflow: hidden;
+	/* padding: var(--padding); */
+	margin: var(--padding);
+	text-decoration: none;
+	color: var(--cl-fg);
+}
+
+.card .media {
+	position: relative;
+	width: 100%;
+	background-color: #14a37f;
+	overflow: hidden;
+	border-radius: var(--br) var(--br) 0 0;
+}
+
+.card .media img,
+.card .media video {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.card .content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--padding);
+	padding: var(--padding);
+}
+
+.card .content .info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--padding);
+}
+
+.card .footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: var(--padding);
+	padding: var(--padding);
+	background-color: var(--cl-bg-alt2);
+}
+
+span.flair {
+	display: inline-block;
+	padding: 0.25em 0.5em;
+	border-radius: 0.25em;
+	font-size: 0.75em;
+	width: fit-content;
+	background-color: var(--cl-accent);
+	color: var(--cl-accent-text);
+}
+
+span.subreddit {
+	font-size: 0.75em;
+	color: var(--cl-fg-alt);
+}
