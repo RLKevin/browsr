@@ -11,7 +11,7 @@
     // // Create formatter (English).
     // const timeAgo = new TimeAgo('en-US')
     
-    let formValue = 'all';
+    let formValue = 'worldnews';
     let posts, subreddits = [];
 
     let subredditsPromise = getSubredditList().then(data => {
@@ -75,7 +75,7 @@
                 {#if post.data.is_video}
                     <div class="media">
                         <video controls>
-                            <source src="{post.data.media.reddit_video.fallback_url}" type="video/mp4">
+                            <source src="{post.data.media.reddit_video.fallback_url}/audio" type="video/mp4">
                         </video>
                         <!-- <span class="type">video</span> -->
                     </div>
@@ -84,7 +84,7 @@
                 <div class="content">
                     <h3>{post.data.title}</h3>
                     <div class="info">
-                        <span class="subreddit">r/{post.data.subreddit}</span>
+                        <span class="subreddit">{post.data.subreddit}</span>
                         {#if post.data.link_flair_text}
                             <span class="flair">{post.data.link_flair_text}</span>
                         {/if}

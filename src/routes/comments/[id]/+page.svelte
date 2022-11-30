@@ -44,7 +44,7 @@
         {#if post.is_video}
             <div class="media">
                 <video controls>
-                    <source src="{post.media.reddit_video.fallback_url}" type="video/mp4">
+                    <source src="{post.media.reddit_video.fallback_url}/audio" type="video/mp4">
                 </video>
                 <!-- <span class="type">video</span> -->
             </div>
@@ -53,7 +53,7 @@
         <div class="content">
             <h1>{post.title}</h1>
             <div class="info">
-                <span class="subreddit">r/{post.subreddit}</span>
+                <a class="subreddit" href="../../r/{post.subreddit}">{post.subreddit}</a>
                 {#if post.link_flair_text}
                     <span class="flair">{post.link_flair_text}</span>
                 {/if}
@@ -63,12 +63,6 @@
             {#if post.post_hint == 'self'}
                 {@html post.selftext_html}
             {/if}
-
-            <!-- <span class="author">{post.data.author}</span> -->
-            <!-- <span class="date">{timeAgo.format(post.data.created_utc * 1000)}</span> -->
-            <!-- {#if post.data.edited}
-                <p class="date">last updated at: {timeAgo.format(post.data.edited * 1000)}</p>
-            {/if} -->
         </div>
         <div class="footer">
             <span class="comments">{post.num_comments} comments</span>

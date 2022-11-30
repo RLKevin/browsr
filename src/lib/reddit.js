@@ -4,7 +4,9 @@ export let subreddits = [
     'homeassistant',
     'programminghumor',
     'sveltejs',
+    'thesilphroad',
     'trackmania',
+    'trap',
     'vaping',
     'web_design',
     'webdev',
@@ -12,14 +14,14 @@ export let subreddits = [
 ];
 
 export async function getPosts(subreddit = 'aww') {
-	const response = await fetch(`https://api.reddit.com/r/${subreddit}.json`);
+	const response = await fetch(`https://api.reddit.com/r/${subreddit}.json?raw_json=1&limit=100`);
 	const json = await response.json();
 	return json.data.children;
 }
 
 export async function getPost(id) {
 	const response = await fetch(
-		`https://api.reddit.com/comments/${id}.json?raw_json=1`
+		`https://api.reddit.com/comments/${id}.json?raw_json=1&limit=100`
 	);
 	const json = await response.json();
 	return json[0].data.children;
@@ -27,7 +29,7 @@ export async function getPost(id) {
 
 export async function getComments(id) {
     const response = await fetch(
-        `https://api.reddit.com/comments/${id}.json?raw_json=1`
+        `https://api.reddit.com/comments/${id}.json?raw_json=1&limit=100`
     );
     const json = await response.json();
     return json[1].data.children;
@@ -35,7 +37,7 @@ export async function getComments(id) {
 
 export async function getSubreddits() {
 
-	const response = await fetch(`https://api.reddit.com/r/${subreddits.join('+')}.json?raw_json=1`);
+	const response = await fetch(`https://api.reddit.com/r/${subreddits.join('+')}.json?raw_json=1&limit=100`);
 	const json = await response.json();
 	return json.data.children;
 }

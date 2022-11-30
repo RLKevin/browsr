@@ -18,7 +18,7 @@
 
     let promise = getPosts(id).then(data => {
         posts = data;
-        // console.log(posts);
+        console.log(posts);
     });
 
 </script>
@@ -32,27 +32,26 @@
         <span class="spinner"></span>
     {:then number}
         {#each posts as post}
-            <a class="card" href="comments/{post.data.id}">
-
+            <a class="card" href="../comments/{post.data.id}">
+                <!-- {post.data.post_hint} -->
                 <!-- images -->
                 {#if post.data.post_hint == 'image'}
                     <div class="media">
-                        {#if post.data.post_hint == 'image'}
-                            <img loading="lazy" src="{post.data.url}" alt="{post.data.title}">
-                            <!-- <span class="type">image</span> -->
-                        {/if}
-                        {#if post.data.post_hint == 'link'}
-                            <img loading="lazy" src="{post.data.thumbnail}" alt="{post.data.title}">
-                            <span class="type">link</span>
-                        {/if}
+                        <img loading="lazy" src="{post.data.url}" alt="{post.data.title}">
+                        <!-- <span class="type">image</span> -->
                     </div>
                 {/if}
-
+                    
+                {#if post.data.post_hint == 'link'}
+                    <img loading="lazy" src="{post.data.thumbnail}" alt="{post.data.title}">
+                    <span class="type">link</span>
+                {/if}
                 <!-- video -->
                 {#if post.data.is_video}
                     <div class="media">
+                        <!-- svelte-ignore a11y-media-has-caption -->
                         <video controls>
-                            <source src="{post.data.media.reddit_video.fallback_url}" type="video/mp4">
+                            <source src="{post.data.media.reddit_video.fallback_url}/audio" type="video/mp4">
                         </video>
                         <!-- <span class="type">video</span> -->
                     </div>
@@ -61,7 +60,7 @@
                 <div class="content">
                     <h3>{post.data.title}</h3>
                     <div class="info">
-                        <span class="subreddit">r/{post.data.subreddit}</span>
+                        <span class="subreddit">{post.data.subreddit}</span>
                         {#if post.data.link_flair_text}
                             <span class="flair">{post.data.link_flair_text}</span>
                         {/if}
