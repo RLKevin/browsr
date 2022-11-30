@@ -2,7 +2,7 @@ export let subreddits = [
     'affinity',
     'harrypottergame',
     'homeassistant',
-    'programminghumor',
+    'ProgrammerHumor',
     'sveltejs',
     'thesilphroad',
     'trackmania',
