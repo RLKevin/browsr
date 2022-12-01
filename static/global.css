@@ -1,6 +1,6 @@
 :root {
-	--accent: #1de9b6;
-	--link: #14a37f;
+	--accent: #b8c0dc;
+	--link: #2342b1;
 	--br: 8px;
 	--padding: 16px;
 }
@@ -12,8 +12,8 @@
 	--cl-bg: #212121;
 	--cl-bg-alt: #333;
 	--cl-bg-alt2: rgb(56, 56, 56);
-	--cl-accent: #1de9b6;
-	--cl-accent-2: #14a37f;
+	--cl-accent: #b8c0dc;
+	--cl-accent-2: #2342b1;
 	--cl-accent-text: #000;
 	--cl-warning: rgb(255, 0, 0, 0.2);
 	--cl-warning-text: #212121;
@@ -126,6 +126,7 @@ section.posts {
 	grid-template-rows: masonry;
 	gap: var(--padding);
 	padding: var(--padding);
+	width: 100%;
 }
 
 .card {

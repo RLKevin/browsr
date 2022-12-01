@@ -54,7 +54,7 @@
     {:then number}
         {#each posts as post}
             <a class="card" href="../comments/{post.data.id}">
-                <!-- {post.data.post_hint} -->
+                {post.data.post_hint}
                 <!-- images -->
                 {#if post.data.post_hint == 'image'}
                     <div class="media">

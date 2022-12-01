@@ -11,6 +11,10 @@ export let subreddits = [
     'web_design',
     'webdev',
     'worldnews',
+    'pcgaming',
+    'nintendoswitch',
+    'botw',
+    'pokemon',
 ];
 
 export async function getPosts(subreddit = 'aww') {
