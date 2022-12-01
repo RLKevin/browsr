@@ -6,9 +6,10 @@
     export let data;
     let id = data.id;
 
-    export let posts = localStorage.getItem(id)
-    ? JSON.parse(localStorage.getItem(id))
-    : [];
+    // export let posts = localStorage.getItem(id)
+    // ? JSON.parse(localStorage.getItem(id))
+    // : [];
+    let posts = [];
     let promise;
     if (posts.length === 0) {
         promise = getPosts(id).then((data) => {
@@ -28,12 +29,12 @@
     // const timeAgo = new TimeAgo('en-US')
 
     function handleRefresh() {
-        localStorage.removeItem(id);
-        promise = getPosts(id).then((data) => {
-            posts = data;
-            console.log(posts);
-            localStorage.setItem(id, JSON.stringify(posts));
-        });
+        // localStorage.removeItem(id);
+        // promise = getPosts(id).then((data) => {
+        //     posts = data;
+        //     console.log(posts);
+        //     localStorage.setItem(id, JSON.stringify(posts));
+        // });
     }
 
 </script>
@@ -53,7 +54,7 @@
     {:then number}
         {#each posts as post}
             <a class="card" href="../comments/{post.data.id}">
-                {post.data.post_hint}
+                <!-- {post.data.post_hint} -->
                 <!-- images -->
                 {#if post.data.post_hint == 'image'}
                     <div class="media">
@@ -83,6 +84,15 @@
                         <span class="subreddit">{post.data.subreddit}</span>
                         {#if post.data.link_flair_text}
                             <span class="flair">{post.data.link_flair_text}</span>
+                        {/if}
+                        {#if post.data.pinned}
+                            <span class="pinned">pinned</span>
+                        {/if}
+                        {#if post.data.stickied}
+                            <span class="stickied">stickied</span>
+                        {/if}
+                        {#if post.data.over_18}
+                            <span class="over18">nsfw</span>
                         {/if}
                     </div>
 

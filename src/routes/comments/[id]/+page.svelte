@@ -10,10 +10,6 @@
     let promise = getPost(id).then(data => {
         post = data[0].data;
         console.log(post);
-        source = decodeURI(post.body_html);
-        // remove comments from source
-        // source = source.replace(/<!--.*?-->/g, '');
-        sourceHTML = post.selftext_html;
     });
 
     let commentPromise = getComments(id).then(data => {
@@ -50,6 +46,14 @@
             </div>
         {/if}
 
+        <!-- link -->
+        {#if post.post_hint == 'link'}
+            <div class="media link">
+                <img loading="lazy" src="{post.thumbnail}" alt="">
+                <span class="link">{post.url}</span>
+            </div>
+        {/if}
+
         <div class="content">
             <h1>{post.title}</h1>
             <div class="info">
@@ -57,10 +61,19 @@
                 {#if post.link_flair_text}
                     <span class="flair">{post.link_flair_text}</span>
                 {/if}
+                {#if post.pinned}
+                    <span class="pinned">pinned</span>
+                {/if}
+                {#if post.stickied}
+                    <span class="stickied">stickied</span>
+                {/if}
+                {#if post.over_18}
+                    <span class="over18">nsfw</span>
+                {/if}
             </div>
 
             <!-- selftext -->
-            {#if post.post_hint == 'self'}
+            {#if post.selftext_html != ''}
                 {@html post.selftext_html}
             {/if}
         </div>

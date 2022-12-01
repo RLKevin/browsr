@@ -39,14 +39,14 @@
         console_log('form submitted to: ' + formValue);
     }
 
-    // function handleRefresh() {
-    //     localStorage.removeItem(id);
-    //     promise = getSubreddits(id).then((data) => {
-    //         posts = data;
-    //         console.log(posts);
-    //         localStorage.setItem(id, JSON.stringify(posts));
-    //     });
-    // }
+    function handleRefresh() {
+        // localStorage.removeItem(id);
+        // promise = getSubreddits(id).then((data) => {
+        //     posts = data;
+        //     console.log(posts);
+        //     localStorage.setItem(id, JSON.stringify(posts));
+        // });
+    }
 
 </script>
 
@@ -108,7 +108,7 @@
                 <!-- link -->
                 {#if post.data.post_hint == 'link'}
                     <div class="media link">
-                        <img loading="lazy" src="{post.data.thumbnail}" alt="link preview image">
+                        <img loading="lazy" src="{post.data.thumbnail}" alt="">
                         <span class="link">{post.data.url}</span>
                     </div>
                 {/if}
@@ -119,6 +119,15 @@
                         <span class="subreddit">{post.data.subreddit}</span>
                         {#if post.data.link_flair_text}
                             <span class="flair">{post.data.link_flair_text}</span>
+                        {/if}
+                        {#if post.data.pinned}
+                            <span class="pinned">pinned</span>
+                        {/if}
+                        {#if post.data.stickied}
+                            <span class="stickied">stickied</span>
+                        {/if}
+                        {#if post.data.over_18}
+                            <span class="over18">nsfw</span>
                         {/if}
                     </div>
 

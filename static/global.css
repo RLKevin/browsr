@@ -15,8 +15,9 @@
 	--cl-accent: #b8c0dc;
 	--cl-accent-2: #2342b1;
 	--cl-accent-text: #000;
+	--cl-accent-2-text: #fff;
 	--cl-warning: rgb(255, 0, 0, 0.2);
-	--cl-warning-text: #212121;
+	--cl-warning-text: #ffffff;
 }
 
 @media (prefers-color-scheme: light) {
@@ -26,9 +27,11 @@
 		--cl-bg: #fff;
 		--cl-bg-alt: #f5f5f5;
 		--cl-bg-alt2: #eeeeee;
-		--cl-accent: #1de9b6;
+		--cl-accent: #b8c0dc;
+		--cl-accent-2: #2342b1;
 		--cl-accent-text: #000;
-		--cl-warning: rgb(255, 0, 0, 0.2);
+		--cl-accent-2-text: #fff;
+		--cl-warning: rgba(255, 122, 122, 0.8);
 		--cl-warning-text: #212121;
 	}
 }
@@ -162,6 +165,7 @@ section.posts {
 
 .media.link {
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	gap: var(--padding);
@@ -179,7 +183,7 @@ section.posts {
 	padding: var(--padding);
 }
 
-.card .content .info {
+.content .info {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -197,14 +201,26 @@ section.posts {
 	background-color: var(--cl-bg-alt2);
 }
 
-span.flair {
+
+span.flair, span.pinned, span.stickied, span.over18 {
 	display: inline-block;
 	padding: 0.25em 0.5em;
 	border-radius: 0.25em;
 	font-size: 0.75em;
 	width: fit-content;
+}
+
+span.flair {
 	background-color: var(--cl-accent);
 	color: var(--cl-accent-text);
+}
+span.pinned, span.stickied {
+	background-color: var(--cl-accent-2);
+	color: var(--cl-accent-2-text);
+}
+span.over18 {
+	background-color: var(--cl-warning);
+	color: var(--cl-warning-text);
 }
 
 span.link {
