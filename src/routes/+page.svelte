@@ -28,7 +28,7 @@
     
     let formValue = 'worldnews';
     let subreddits = [];
-    let id = 'frontpage';
+    let id = 'BrowsR RSS feed';
 
     let subredditsPromise = getSubredditList().then(data => {
         subreddits = data;
