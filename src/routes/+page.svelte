@@ -1,6 +1,20 @@
 <script>
     
     import { getSubreddits, getSubredditList } from '../lib/reddit.js';
+    import 'node-localstorage/register';
+
+    export let posts = localStorage.getItem("frontpage")
+    ? JSON.parse(localStorage.getItem("frontpage"))
+    : [];
+    let promise;
+    if (posts.length === 0) {
+        promise = getSubreddits().then((data) => {
+            posts = data;
+            // console.log(posts);
+            localStorage.setItem("frontpage", JSON.stringify(posts));
+        });
+    }
+
     // import TimeAgo from 'javascript-time-ago'
 
     // // English.
@@ -12,25 +26,34 @@
     // const timeAgo = new TimeAgo('en-US')
     
     let formValue = 'worldnews';
-    let posts, subreddits = [];
+    let subreddits = [];
+    let id = 'frontpage';
 
     let subredditsPromise = getSubredditList().then(data => {
         subreddits = data;
-        console.log(subreddits);
-    });
-
-    let promise = getSubreddits().then(data => {
-        posts = data;
+        // console.log(subreddits);
     });
 
     function handleOnSubmit(event) {
         console_log('form submitted to: ' + formValue);
     }
 
+    function handleRefresh() {
+        localStorage.removeItem(id);
+        promise = getPosts(id).then((data) => {
+            posts = data;
+            console.log(posts);
+            localStorage.setItem(id, JSON.stringify(posts));
+        });
+    }
+
 </script>
 
 <section class="title">
-    <h1>RSS feed</h1>
+    <h1>{id}</h1>
+    <button class="refresh" on:click={handleRefresh}>
+
+    </button>
 </section>
 
 <section class="picker">
@@ -78,6 +101,14 @@
                             <source src="{post.data.media.reddit_video.fallback_url}/audio" type="video/mp4">
                         </video>
                         <!-- <span class="type">video</span> -->
+                    </div>
+                {/if}
+
+                <!-- link -->
+                {#if post.data.post_hint == 'link'}
+                    <div class="media link">
+                        <img loading="lazy" src="{post.data.thumbnail}" alt="link preview image">
+                        <span class="link">{post.data.url}</span>
                     </div>
                 {/if}
 

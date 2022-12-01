@@ -1,6 +1,23 @@
 <script>
     
     import { getPosts } from '../../../lib/reddit.js';
+    import 'node-localstorage/register';
+    import Title from '../../../lib/components/Title.svelte';
+
+    export let data;
+    let id = data.id;
+
+    export let posts = localStorage.getItem(id)
+    ? JSON.parse(localStorage.getItem(id))
+    : [];
+    let promise;
+    if (posts.length === 0) {
+        promise = getPosts(id).then((data) => {
+            posts = data;
+            console.log(posts);
+            localStorage.setItem(id, JSON.stringify(posts));
+        });
+    }
     // import TimeAgo from 'javascript-time-ago'
 
     // // English.
@@ -11,20 +28,24 @@
     // // Create formatter (English).
     // const timeAgo = new TimeAgo('en-US')
 
-    export let data;
-    let id = data.id;
-    
-    let posts = [];
-
-    let promise = getPosts(id).then(data => {
-        posts = data;
-        console.log(posts);
-    });
+    function handleRefresh() {
+        localStorage.removeItem(id);
+        promise = getPosts(id).then((data) => {
+            posts = data;
+            console.log(posts);
+            localStorage.setItem(id, JSON.stringify(posts));
+        });
+    }
 
 </script>
 
+<!-- <Title name={id} /> -->
+
 <section class="title">
-    <h1>{data.id}</h1>
+    <h1>{id}</h1>
+    <button class="refresh" on:click={handleRefresh}>
+
+    </button>
 </section>
 
 <section class="posts">
