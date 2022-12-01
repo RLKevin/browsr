@@ -73,7 +73,7 @@
             </div>
 
             <!-- selftext -->
-            {#if post.selftext_html != ''}
+            {#if post.selftext_html != null}
                 {@html post.selftext_html}
             {/if}
         </div>
