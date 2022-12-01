@@ -1,17 +1,18 @@
 <script>
     
     import { getSubreddits, getSubredditList } from '../lib/reddit.js';
-    import 'node-localstorage/register';
+    // import 'node-localstorage/register';
 
-    export let posts = localStorage.getItem("frontpage")
-    ? JSON.parse(localStorage.getItem("frontpage"))
-    : [];
+    // export let posts = localStorage.getItem("frontpage")
+    // ? JSON.parse(localStorage.getItem("frontpage"))
+    // : [];
+    let posts = [];
     let promise;
     if (posts.length === 0) {
         promise = getSubreddits().then((data) => {
             posts = data;
             // console.log(posts);
-            localStorage.setItem("frontpage", JSON.stringify(posts));
+            // localStorage.setItem("frontpage", JSON.stringify(posts));
         });
     }
 
@@ -38,14 +39,14 @@
         console_log('form submitted to: ' + formValue);
     }
 
-    function handleRefresh() {
-        localStorage.removeItem(id);
-        promise = getPosts(id).then((data) => {
-            posts = data;
-            console.log(posts);
-            localStorage.setItem(id, JSON.stringify(posts));
-        });
-    }
+    // function handleRefresh() {
+    //     localStorage.removeItem(id);
+    //     promise = getSubreddits(id).then((data) => {
+    //         posts = data;
+    //         console.log(posts);
+    //         localStorage.setItem(id, JSON.stringify(posts));
+    //     });
+    // }
 
 </script>
 

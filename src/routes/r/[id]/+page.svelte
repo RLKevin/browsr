@@ -1,7 +1,6 @@
 <script>
     
     import { getPosts } from '../../../lib/reddit.js';
-    import 'node-localstorage/register';
     import Title from '../../../lib/components/Title.svelte';
 
     export let data;

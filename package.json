@@ -17,7 +17,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"javascript-time-ago": "^2.5.9",
-		"node-localstorage": "^2.2.1"
+		"javascript-time-ago": "^2.5.9"
 	}
 }

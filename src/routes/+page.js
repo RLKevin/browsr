@@ -1,14 +1,12 @@
 import { error } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageLoad} */
-export function load({ params, setHeaders }) {
+export function load({ setHeaders }) {
 	setHeaders({
 		age: 0,
 		'cache-control': 'max-age',
 	});
-	return {
-		id: params.id,
-	};
+    return;
 
 	throw error(404, 'Not found');
 }
