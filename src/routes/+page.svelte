@@ -132,7 +132,7 @@
                     </div>
 
                     <!-- selftext -->
-                    {#if post.data.post_hint == 'self'}
+                    {#if post.data.selftext_html != null}
                         {@html post.data.selftext_html}
                     {/if}
 

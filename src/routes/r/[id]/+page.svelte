@@ -1,40 +1,36 @@
 <script>
     
-    import { getPosts } from '../../../lib/reddit.js';
+    import { getPosts, getNextPage } from '../../../lib/reddit.js';
     import Title from '../../../lib/components/Title.svelte';
+    import { onMount } from 'svelte';
 
     export let data;
     let id = data.id;
 
-    // export let posts = localStorage.getItem(id)
-    // ? JSON.parse(localStorage.getItem(id))
-    // : [];
     let posts = [];
     let promise;
+    let after = '';
     if (posts.length === 0) {
         promise = getPosts(id).then((data) => {
-            posts = data;
-            console.log(posts);
-            localStorage.setItem(id, JSON.stringify(posts));
+            posts = data.data.children;
+            after = data.data.after;
         });
     }
-    // import TimeAgo from 'javascript-time-ago'
 
-    // // English.
-    // import en from 'javascript-time-ago/locale/en'
+    onMount(() => {
+        window.onscroll = function(e) {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                console.log('bottom of page');
+                handleNextPage();
+            }
+        };
+    });
 
-    // TimeAgo.addDefaultLocale(en)
-
-    // // Create formatter (English).
-    // const timeAgo = new TimeAgo('en-US')
-
-    function handleRefresh() {
-        // localStorage.removeItem(id);
-        // promise = getPosts(id).then((data) => {
-        //     posts = data;
-        //     console.log(posts);
-        //     localStorage.setItem(id, JSON.stringify(posts));
-        // });
+    function handleNextPage() {
+        promise = getNextPage(id, after).then((data) => {
+            posts = data.data.children;
+            after = data.data.after;
+        });
     }
 
 </script>
@@ -43,9 +39,6 @@
 
 <section class="title">
     <h1>{id}</h1>
-    <button class="refresh" on:click={handleRefresh}>
-
-    </button>
 </section>
 
 <section class="posts">
@@ -55,7 +48,7 @@
         {#each posts as post}
             <a class="card" href="../comments/{post.data.id}">
                 <!-- {post.data.post_hint} -->
-                
+
                 <!-- images -->
                 {#if post.data.post_hint == 'image'}
                     <div class="media">
@@ -69,9 +62,17 @@
                     <div class="media">
                         <!-- svelte-ignore a11y-media-has-caption -->
                         <video controls>
-                            <source src="{post.data.media.reddit_video.fallback_url}/audio" type="video/mp4">
+                            <source src="{post.data.media.reddit_video.fallback_url}" type="video/mp4">
                         </video>
                         <!-- <span class="type">video</span> -->
+                    </div>
+                {/if}
+                {#if post.data.post_hint == 'rich:video'}
+                    <!-- reddit rich:video embed -->
+                    <div class="media">
+                        <div class="embed">
+                            {@html post.data.media.oembed.html}
+                        </div>
                     </div>
                 {/if}
 
