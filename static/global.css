@@ -36,10 +36,14 @@
 	}
 }
 
-* {
+*, *::before, *::after {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+}
+
+html, body {
+	width: 100%;
 }
 
 body {
@@ -47,6 +51,7 @@ body {
 	background-color: var(--cl-bg);
 	color: var(--cl-fg);
 	line-height: 1.4;
+	word-break: break-all;
 }
 
 span.spinner {
@@ -125,7 +130,7 @@ section.picker input {
 section.posts {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 	grid-template-rows: masonry;
 	gap: var(--padding);
 	padding: var(--padding);
