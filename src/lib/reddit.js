@@ -39,7 +39,7 @@ export async function getNextPage(subreddit, after) {
 
 export async function getPost(id) {
 	const response = await fetch(
-		`https://api.reddit.com/comments/${id}.json?raw_json=1&limit=100`
+		`https://api.reddit.com/comments/${id}.json?raw_json=1&limit=10`
 	);
 	const json = await response.json();
 	return json[0].data.children;
@@ -57,10 +57,20 @@ export async function getSubreddits() {
 	const response = await fetch(
 		`https://api.reddit.com/r/${subreddits.join(
 			'+'
-		)}.json?raw_json=1&limit=100`
+		)}.json?raw_json=1&limit=10`
 	);
 	const json = await response.json();
-	return json.data.children;
+	return json;
+}
+
+export async function getNextPageSubreddits(after) {
+    const response = await fetch(
+        `https://api.reddit.com/r/${subreddits.join(
+            '+'
+        )}.json?raw_json=1&limit=10&after=${after}`
+    );
+    const json = await response.json();
+    return json;
 }
 
 export async function getSubredditList() {

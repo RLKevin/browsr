@@ -20,17 +20,18 @@
     onMount(() => {
         window.onscroll = function(e) {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                console.log('bottom of page');
-                handleNextPage();
+                fetchData();
             }
         };
     });
 
-    function handleNextPage() {
-        promise = getNextPage(id, after).then((data) => {
-            posts = data.data.children;
-            after = data.data.after;
-        });
+    const fetchData = async () => {
+        const response = await fetch(
+            `https://api.reddit.com/r/${id}.json?raw_json=1&limit=10&after=${after}`
+        );
+        const json = await response.json();
+        posts = posts.concat(json.data.children);
+        after = json.data.after;
     }
 
 </script>
