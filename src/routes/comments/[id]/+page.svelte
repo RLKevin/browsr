@@ -1,6 +1,9 @@
 <script>
     // import SvelteMarkdown from 'svelte-markdown'
     import { getPost, getComments } from '../../../lib/reddit.js';
+    import Media from '../../../lib/components/Media.svelte';
+    import Content from '../../../lib/components/Content.svelte';
+    import Footer from '../../../lib/components/Footer.svelte';
 
     export let data;
     let id = data.id;
@@ -8,7 +11,7 @@
     let post, comments, source, sourceHTML;
 
     let promise = getPost(id).then(data => {
-        post = data[0].data;
+        post = data[0];
         console.log(post);
     });
 
@@ -22,65 +25,13 @@
     {#await promise}
         <span class="spinner"></span>
     {:then number}
-        <!-- images -->
-        {#if post.post_hint == 'image'}
-            <div class="media">
-                {#if post.post_hint == 'image'}
-                    <img loading="lazy" src="{post.url}" alt="{post.title}">
-                    <!-- <span class="type">image</span> -->
-                {/if}
-                {#if post.post_hint == 'link'}
-                    <img loading="lazy" src="{post.thumbnail}" alt="{post.title}">
-                    <span class="type">link</span>
-                {/if}
-            </div>
-        {/if}
 
-        <!-- video -->
-        {#if post.is_video}
-            <div class="media">
-                <video controls>
-                    <source src="{post.media.reddit_video.fallback_url}/audio" type="video/mp4">
-                </video>
-                <!-- <span class="type">video</span> -->
-            </div>
-        {/if}
+        <Media {post} />
 
-        <!-- link -->
-        {#if post.post_hint == 'link'}
-            <div class="media link">
-                <img loading="lazy" src="{post.thumbnail}" alt="">
-                <span class="link">{post.url}</span>
-            </div>
-        {/if}
+        <Content {post} />
 
-        <div class="content">
-            <h1>{post.title}</h1>
-            <div class="info">
-                <a class="subreddit" href="../../r/{post.subreddit}">{post.subreddit}</a>
-                {#if post.link_flair_text}
-                    <span class="flair">{post.link_flair_text}</span>
-                {/if}
-                {#if post.pinned}
-                    <span class="pinned">pinned</span>
-                {/if}
-                {#if post.stickied}
-                    <span class="stickied">stickied</span>
-                {/if}
-                {#if post.over_18}
-                    <span class="over18">nsfw</span>
-                {/if}
-            </div>
-
-            <!-- selftext -->
-            {#if post.selftext_html != null}
-                {@html post.selftext_html}
-            {/if}
-        </div>
-        <div class="footer">
-            <span class="comments">{post.num_comments} comments</span>
-            <span class="score">{post.score} points</span>
-        </div>
+        <Footer {post} />
+        
     {:catch error}
         <p style="color: red">{error.message}</p>
     {/await}

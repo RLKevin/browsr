@@ -138,11 +138,12 @@ section.posts {
 	position: relative;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	grid-template-rows: masonry;
 	gap: var(--padding);
 	padding: var(--padding);
 	width: 100%;
+	max-width: 800px;
+	margin-inline: auto;
 	padding-bottom: 200px;
 }
 
@@ -196,16 +197,22 @@ section.posts::after {
 }
 
 .media.link {
-	display: flex;
+	display: flex !important;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	gap: var(--padding);
 }
 
 .media.link img {
 	width: 64px;
 	aspect-ratio: 1/1;
+	object-fit: cover;
+}
+.media.link span.link {
+	display: block;
+	padding: var(--padding);
+	width: 100%;
+	word-break: break-all;
 }
 
 .content {
@@ -278,6 +285,9 @@ section.post {
 	display: flex;
 	flex-direction: column;
 	background-color: var(--cl-bg-alt);
+	width: 100%;
+	max-width: 800px;
+	margin-inline: auto;
 }
 
 section.comments {
@@ -285,6 +295,9 @@ section.comments {
 	flex-direction: column;
 	gap: var(--padding);
 	padding: var(--padding);
+	width: 100%;
+	max-width: 800px;
+	margin-inline: auto;
 }
 
 .comment {
