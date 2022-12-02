@@ -37,11 +37,7 @@
 
 </script>
 
-<!-- <Title name={id} /> -->
-
-<section class="title">
-    <h1>{id}</h1>
-</section>
+<Title name={id} />
 
 <section class="posts">
     {#await promise}

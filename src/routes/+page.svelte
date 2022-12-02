@@ -3,7 +3,10 @@
     import { getSubreddits, getSubredditList, getNextPageSubreddits } from '../lib/reddit.js';
     import { onMount } from 'svelte';
     import Card from '../lib/components/Card.svelte';
+    import Title from '../lib/components/Title.svelte';
+    import Menu from '../lib/components/Menu.svelte';
 
+    let id = 'BrowsR RSS feed';
     let posts = [];
     let promise;
     let after = '';
@@ -12,18 +15,6 @@
             posts = data.data.children;
             after = data.data.after;
         });
-    }
-    
-    let formValue = 'worldnews';
-    let subreddits, newData = [];
-    let id = 'BrowsR RSS feed';
-
-    let subredditsPromise = getSubredditList().then(data => {
-        subreddits = data;
-    });
-
-    function handleOnSubmit(event) {
-        console_log('form submitted to: ' + formValue);
     }
 
     onMount(() => {
@@ -47,26 +38,9 @@
 
 </script>
 
-<section class="title">
-    <h1>{id}</h1>
-</section>
+<Title name={id} />
 
-<section class="picker">
-    <form action="./r/{formValue}">
-        <input bind:value={formValue} type="text" list="subreddits" placeholder="Enter Here" />
-            {#await subredditsPromise}
-                <span class="spinner"></span>
-            {:then number}
-            <datalist id="subreddits">
-                {#each subreddits as subreddit}
-                    <option value="{subreddit}">{subreddit}</option>
-                {/each}
-            </datalist>
-        {:catch error}
-            <p style="color: red">{error.message}</p>
-        {/await}
-    </form>
-</section>
+<Menu />
 
 <section class="posts">
     {#each posts as post}

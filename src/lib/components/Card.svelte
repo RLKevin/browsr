@@ -14,3 +14,20 @@
     <Footer {post} />
 
 </a>
+
+<style>
+    .card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        /* gap: 16px; */
+        background-color: var(--cl-bg-alt);
+        border-radius: var(--br);
+        overflow: hidden;
+        /* padding: var(--padding); */
+        text-decoration: none;
+        color: var(--cl-fg);
+        height: auto;
+        margin-bottom: auto;
+    }
+</style>

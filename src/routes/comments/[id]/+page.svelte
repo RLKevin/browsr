@@ -4,6 +4,7 @@
     import Media from '../../../lib/components/Media.svelte';
     import Content from '../../../lib/components/Content.svelte';
     import Footer from '../../../lib/components/Footer.svelte';
+    import Comment from '../../../lib/components/Comment.svelte';
 
     export let data;
     let id = data.id;
@@ -42,14 +43,7 @@
         <span class="spinner"></span>
     {:then number}
         {#each comments as comment}
-            <div class="comment {comment.is_submitter ? 'op' : ''}">
-                <div class="author">
-                    <span>{comment.data.author}</span>
-                </div>
-                <div class="content">
-                    {@html comment.data.body_html}
-                </div>
-            </div>
+            <Comment {comment}/>
         {/each}
     {:catch error}
         <p style="color: red">{error.message}</p>
@@ -57,9 +51,22 @@
 </section>
 
 <style>
-    .media {
-        display: block;
+    section.post {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--cl-bg-alt);
         width: 100%;
-        height: auto;
+        max-width: 800px;
+        margin-inline: auto;
+    }
+    
+    section.comments {
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding);
+        padding: var(--padding);
+        width: 100%;
+        max-width: 800px;
+        margin-inline: auto;
     }
 </style>
