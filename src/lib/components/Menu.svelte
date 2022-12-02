@@ -4,7 +4,7 @@
     export let name; // page title for later use
 
     let formValue = 'worldnews';
-    let menuOpen = true;
+    let menuOpen = false;
     let subreddits, newData = [];
     let id = 'BrowsR RSS feed';
 
