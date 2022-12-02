@@ -26,7 +26,7 @@
         <span class="spinner"></span>
     {:then number}
 
-        <Media {post} />
+        <Media {post} linkable=true />
 
         <Content {post} />
 

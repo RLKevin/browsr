@@ -5,7 +5,7 @@
     export let post;
 </script>
 
-<a class="card" href="comments/{post.data.id}">
+<a class="card" href="/comments/{post.data.id}">
 
     <Media {post} />
 
