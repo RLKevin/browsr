@@ -81,7 +81,6 @@
         margin-inline: auto;
         height: 64px;
         gap: var(--padding);
-        padding: var(--padding);
     }
 
     button.menu {
@@ -90,6 +89,8 @@
         all: unset;
         cursor: pointer;
         padding: var(--padding);
+        display: grid;
+        place-items: center;
     }
 
     nav {
