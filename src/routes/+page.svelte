@@ -38,9 +38,9 @@
 
 </script>
 
-<Title name={id} />
+<Menu name={id} />
 
-<Menu />
+<Title name={id} />
 
 <section class="posts">
     {#each posts as post}
