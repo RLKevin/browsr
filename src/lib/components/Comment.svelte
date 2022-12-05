@@ -8,6 +8,7 @@
     let hasReplies = comment.data.replies ? comment.data.replies.data.children.length : false;
     if (hasReplies) {
         replies = comment.data.replies.data.children;
+        replies.splice(-1, 1);
     }
 
     function handleClick() {

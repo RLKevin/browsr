@@ -18,6 +18,7 @@
 
     let commentPromise = getComments(id).then(data => {
         comments = data;
+        comments.splice(-1, 1);
         console.log(comments);
     });
 </script>
