@@ -50,9 +50,6 @@
             <p style="color: red">{error.message}</p>
         {/await}
     </ul>
-</nav>
-
-<section class="picker">
     <form action="./r/{formValue}">
         <input bind:value={formValue} type="text" list="subreddits" placeholder="Enter Here" />
             {#await subredditsPromise}
@@ -67,11 +64,14 @@
             <p style="color: red">{error.message}</p>
         {/await}
     </form>
-</section>
+</nav>
 
 <style>
     section.header {
         display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
@@ -81,6 +81,7 @@
         margin-inline: auto;
         height: 64px;
         gap: var(--padding);
+        z-index: 98;
     }
 
     button.menu {
@@ -129,5 +130,24 @@
     }
     nav.active {
         transform: translateX(0);
+    }
+
+    section.picker {
+        padding: var(--padding);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input {
+        width: 100%;
+        max-width: 400px;
+        padding: var(--padding);
+        border-radius: var(--br);
+        border: 1px solid var(--cl-bg-alt);
+        background-color: var(--cl-bg-alt2);
+        color: var(--cl-fg);
+        font-size: 1em;
+        margin: var(--padding);
     }
 </style>

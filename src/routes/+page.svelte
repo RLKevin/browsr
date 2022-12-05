@@ -17,6 +17,11 @@
         });
     }
 
+    let subreddits = [];
+    let subredditsPromise = getSubredditList().then(data => {
+        subreddits = data;
+    });
+
     onMount(() => {
         window.onscroll = function(e) {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -39,8 +44,6 @@
 </script>
 
 <Menu name={id} />
-
-<Title name={id} />
 
 <section class="posts">
     {#each posts as post}

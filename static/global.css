@@ -115,25 +115,6 @@ button.refresh {
 	background-repeat: no-repeat;
 }
 
-section.picker {
-	padding: var(--padding);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-section.picker input {
-	width: 100%;
-	max-width: 400px;
-	padding: var(--padding);
-	border-radius: var(--br);
-	border: 1px solid var(--cl-bg-alt);
-	background-color: var(--cl-bg-alt2);
-	color: var(--cl-fg);
-	font-size: 1em;
-	margin-bottom: var(--padding);
-}
-
 section.posts {
 	position: relative;
 	display: grid;
@@ -145,6 +126,7 @@ section.posts {
 	max-width: 800px;
 	margin-inline: auto;
 	padding-bottom: 200px;
+	margin-top: 64px;
 }
 
 section.posts::after {

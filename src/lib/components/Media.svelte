@@ -31,7 +31,8 @@
         </a>
     {:else}
         <div class="media link">
-            {#if post.data.thumbnail != '' && post.data.thumbnail != 'default' && post.data.thumbnail != 'self' && post.data.thumbnail != 'nsfw' && post.data.thumbnail != 'spoiler' && !post.data.thumbnail}
+            {#if !['default', 'self'].includes(post.data.thumbnail)}
+                <!-- <p>{post.data.thumbnail}</p> -->
                 <img loading="lazy" src="{post.data.thumbnail}" alt="">
             {/if}
             <span class="link">{post.data.url}</span>
