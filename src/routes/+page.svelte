@@ -1,9 +1,8 @@
 <script>
     
-    import { getSubreddits, getSubredditList, getNextPageSubreddits } from '../lib/reddit.js';
+    import { getFrontpage, getMultiRedditString, getSubredditListWithNames } from '../lib/reddit.js';
     import { onMount } from 'svelte';
     import Card from '../lib/components/Card.svelte';
-    import Title from '../lib/components/Title.svelte';
     import Menu from '../lib/components/Menu.svelte';
 
     let id = 'BrowsR RSS feed';
@@ -11,16 +10,13 @@
     let promise;
     let after = '';
     if (posts.length === 0) {
-        promise = getSubreddits().then((data) => {
+        promise = getFrontpage().then((data) => {
             posts = data.data.children;
             after = data.data.after;
         });
     }
 
-    let subreddits = [];
-    let subredditsPromise = getSubredditList().then(data => {
-        subreddits = data;
-    });
+    let subreddits = getSubredditListWithNames();
 
     onMount(() => {
         window.onscroll = function(e) {
@@ -32,9 +28,7 @@
 
     const fetchData = async () => {
         const response = await fetch(
-            `https://api.reddit.com/r/${subreddits.join(
-                '+'
-            )}.json?raw_json=1&limit=10&after=${after}`
+            `https://api.reddit.com/r/${getMultiRedditString()}.json?raw_json=1&limit=10&after=${after}`
         );
         const json = await response.json();
         posts = posts.concat(json.data.children);
@@ -43,10 +37,14 @@
 
 </script>
 
-<Menu name={id} />
+<Menu name={id} nav=true />
 
-<section class="posts">
-    {#each posts as post}
-        <Card {post} />
-    {/each}
-</section>
+<div class="page">
+
+    <section class="posts">
+        {#each posts as post}
+            <Card {post} />
+        {/each}
+    </section>
+
+</div>

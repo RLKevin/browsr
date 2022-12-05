@@ -1,20 +1,17 @@
 <script>
-    import { getSubredditList, getNextPageSubreddits } from '../reddit.js';
+    import { getSubredditListWithNames } from '../reddit.js';
 
     export let name; // page title for later use
+    export let nav; // enable/disable navigation
 
     let formValue = 'worldnews';
     let menuOpen = false;
-    let subreddits, newData = [];
+    let subreddits = [];
     let id = 'BrowsR RSS feed';
 
-    let subredditsPromise = getSubredditList().then(data => {
+    let subredditsPromise = getSubredditListWithNames().then(data => {
         subreddits = data;
     });
-
-    function handleOnSubmit(event) {
-        console_log('form submitted to: ' + formValue);
-    }
 
     function toggleMenu() {
         menuOpen = !menuOpen;
@@ -35,36 +32,38 @@
     </h1>
 </section>
 
-<nav class="{menuOpen ? 'active' : ''}">
-    <span class="title">Saved RSS feeds</span>
-    <ul class="menuList">
-        {#await subredditsPromise}
-            <span class="spinner"></span>
-        {:then number}
-            {#each subreddits as subreddit}
-                <li class="menuListItem">
-                    <a href="/r/{subreddit}">{subreddit}</a>
-                </li>
-            {/each}
-        {:catch error}
-            <p style="color: red">{error.message}</p>
-        {/await}
-    </ul>
-    <form action="./r/{formValue}">
-        <input bind:value={formValue} type="text" list="subreddits" placeholder="Enter Here" />
+{#if nav}
+    <nav class="{menuOpen ? 'active' : ''}">
+        <span class="title">Saved RSS feeds</span>
+        <ul class="menuList">
             {#await subredditsPromise}
                 <span class="spinner"></span>
             {:then number}
-            <datalist id="subreddits">
                 {#each subreddits as subreddit}
-                    <option value="{subreddit}">{subreddit}</option>
+                    <li class="menuListItem">
+                        <a href="/r/{subreddit.name}">{subreddit.title}</a>
+                    </li>
                 {/each}
-            </datalist>
-        {:catch error}
-            <p style="color: red">{error.message}</p>
-        {/await}
-    </form>
-</nav>
+            {:catch error}
+                <p style="color: red">{error.message}</p>
+            {/await}
+        </ul>
+        <form action="./r/{formValue}">
+            <input bind:value={formValue} type="text" list="subreddits" placeholder="Enter Here" />
+                {#await subredditsPromise}
+                    <span class="spinner"></span>
+                {:then number}
+                <datalist id="subreddits">
+                    {#each subreddits as subreddit}
+                        <option value="{subreddit.name}">{subreddit.title}</option>
+                    {/each}
+                </datalist>
+            {:catch error}
+                <p style="color: red">{error.message}</p>
+            {/await}
+        </form>
+    </nav>
+{/if}
 
 <style>
     section.header {
@@ -77,7 +76,6 @@
         align-items: center;
         background-color: var(--cl-bg-alt);
         width: 100%;
-        max-width: 800px;
         margin-inline: auto;
         height: 64px;
         gap: var(--padding);
@@ -101,9 +99,15 @@
         background-color: var(--cl-bg-alt);
         z-index: 99;
         width: calc(100% - 64px);
+        max-width: var(--navwidth);
         transform: translateX(-100%);
         transition: transform 0.15s ease-out;
         overflow-y: scroll;
+    }
+    @media screen and (min-width: 1200px) {
+        nav {
+            transform: translateX(0);
+        }
     }
     span.title {
         display: flex;
@@ -140,7 +144,7 @@
     }
 
     input {
-        width: 100%;
+        width: calc(100% - calc(var(--padding) * 2));
         max-width: 400px;
         padding: var(--padding);
         border-radius: var(--br);
@@ -148,6 +152,6 @@
         background-color: var(--cl-bg-alt2);
         color: var(--cl-fg);
         font-size: 1em;
-        margin: var(--padding);
+        margin: var(--padding) auto;
     }
 </style>
