@@ -4,20 +4,14 @@
 </script>
 
 {#if post.data.post_hint == 'image'}
-    <div class="media">
-        {#if post.data.post_hint == 'image'}
-            <img loading="lazy" src="{post.data.url}" alt="{post.data.title}">
-            <!-- <span class="type">image</span> -->
-        {/if}
-        {#if post.data.post_hint == 'link'}
-            <img loading="lazy" src="{post.data.thumbnail}" alt="{post.data.title}">
-            <span class="type">link</span>
-        {/if}
+    <div class="media {linkable ? 'full-height' : ''}">
+        <img loading="lazy" src="{post.data.url}" alt="{post.data.title}">
     </div>
 {:else if post.data.is_video} 
-    <div class="media">
+    <div class="media {linkable ? 'full-height' : ''}">
+        <!-- svelte-ignore a11y-media-has-caption -->
         <video controls>
-            <source src="{post.data.media.reddit_video.fallback_url}/audio" type="video/mp4">
+            <source src="{post.data.media.reddit_video.fallback_url}" type="video/mp4">
         </video>
         <!-- <span class="type">video</span> -->
     </div>
@@ -32,7 +26,6 @@
     {:else}
         <div class="media link">
             {#if !['default', 'self'].includes(post.data.thumbnail)}
-                <!-- <p>{post.data.thumbnail}</p> -->
                 <img loading="lazy" src="{post.data.thumbnail}" alt="">
             {/if}
             <span class="link">{post.data.url}</span>
@@ -59,6 +52,10 @@
         object-fit: contain;
     }
 
+    .media.full-height > * {
+        max-height: none;
+    }
+
     .media iframe {
         aspect-ratio: 1/1;
     }
@@ -76,9 +73,11 @@
         object-fit: cover;
     }
     .media.link span.link {
-        display: block;
-        padding: var(--padding);
+        display: flex;
+        align-items: center;
+        padding-inline: var(--padding);
         width: 100%;
+        min-height: 64px;
         word-break: break-all;
     }
 </style>

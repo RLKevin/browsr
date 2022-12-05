@@ -18,6 +18,7 @@
 
     let commentPromise = getComments(id).then(data => {
         comments = data;
+        console.log(comments);
     });
 </script>
 
