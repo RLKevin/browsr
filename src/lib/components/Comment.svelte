@@ -4,9 +4,10 @@
     export let comment;
 
     let replies;
-    let expanded = false;
+    let expanded = true;
     let hasReplies = comment.data.replies ? comment.data.replies.data.children.length : false;
     if (hasReplies) {
+        hasReplies = hasReplies - 1;
         replies = comment.data.replies.data.children;
         replies.splice(-1, 1);
     }
@@ -25,6 +26,7 @@
         {@html comment.data.body_html}
     </div>
     {#if hasReplies}
+        <span class="replycount">{hasReplies} repl{hasReplies > 1 ? 'ies' : 'y'}</span>
         <div class="replies">
             {#each replies as reply}
                 <Comment comment={reply}/>
@@ -50,6 +52,13 @@
 
     .comment .author {
         font-weight: bold;
+    }
+
+    span.replycount {
+        font-weight: bold;
+        color: var(--cl-accent);
+        font-size: 0.75em;
+        cursor: pointer;
     }
 
     .replies {

@@ -7,7 +7,6 @@
     let formValue = 'worldnews';
     let menuOpen = false;
     let subreddits = [];
-    let id = 'BrowsR RSS feed';
 
     let subredditsPromise = getSubredditListWithNames().then(data => {
         subreddits = data;
@@ -34,11 +33,13 @@
 
 {#if nav}
     <nav class="{menuOpen ? 'active' : ''}">
-        <span class="title">Saved RSS feeds</span>
         <ul class="menuList">
             {#await subredditsPromise}
-                <span class="spinner"></span>
+            <span class="spinner"></span>
             {:then number}
+                <li>
+                    <a class="title" href="/">Saved RSS feeds ({subreddits.length})</a>
+                </li>
                 {#each subreddits as subreddit}
                     <li class="menuListItem">
                         <a href="/r/{subreddit.name}">{subreddit.title}</a>
@@ -48,7 +49,7 @@
                 <p style="color: red">{error.message}</p>
             {/await}
         </ul>
-        <form action="./r/{formValue}">
+        <form action="/r/{formValue}">
             <input bind:value={formValue} type="text" list="subreddits" placeholder="Enter Here" />
                 {#await subredditsPromise}
                     <span class="spinner"></span>
@@ -128,6 +129,9 @@
         align-items: center;
         height: 48px;
         padding: var(--padding);
+    }
+    nav ul li a.title {
+        color: var(--cl-fg);
     }
     nav ul li:nth-of-type(2n - 1) a {
         background-color: var(--cl-bg);

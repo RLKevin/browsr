@@ -28,7 +28,7 @@
         </div>
     {/if}
 
-    <span class="author">by {post.data.author}</span>
+    <!-- <span class="author">by {post.data.author}</span> -->
     <!-- <span class="date">{timeAgo.format(post.data.created_utc * 1000)}</span> -->
     <!-- {#if post.data.edited}
         <p class="date">last updated at: {timeAgo.format(post.data.edited * 1000)}</p>

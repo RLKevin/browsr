@@ -3,15 +3,22 @@
     import Content from './Content.svelte';
     import Footer from './Footer.svelte';
     export let post;
+
+    function logCardInfo() {
+        console.log(post);
+    }
 </script>
 
+<!-- <div on:click={logCardInfo} class="card-info">
+    log card info
+</div> -->
 <a class="card" href="/comments/{post.data.id}">
 
     <Media {post} />
 
     <Content {post} />
 
-    <Footer {post} />
+    <!-- <Footer {post} /> -->
 
 </a>
 

@@ -3,7 +3,7 @@ export let subreddits = [
 	{ name: 'botw', title: 'Breath of the Wild' },
 	{ name: 'harrypottergame', title: 'Harry Potter: Wizards Unite' },
 	{ name: 'homeassistant', title: 'Home Assistant' },
-	{ name: 'ik_ihe', title: 'ik_ihe' },
+	// { name: 'ik_ihe', title: 'ik_ihe' },
 	{ name: 'malelivingspace', title: 'Male Living Space' },
 	{ name: 'nintendoswitch', title: 'Nintendo Switch' },
 	{ name: 'pcgaming', title: 'PC Gaming' },

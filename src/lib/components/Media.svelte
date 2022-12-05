@@ -15,6 +15,16 @@
         </video>
         <!-- <span class="type">video</span> -->
     </div>
+{:else if post.data.url.includes('youtube.com')}
+    <div class="media">
+        <iframe width="560" height="315" src="{post.data.url.replace('/watch?v=', '/embed/')}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+{:else if post.data.media_embed.content}
+    <div class="media {linkable ? 'full-height' : ''}">
+        {@html post.data.media_embed.content}
+    </div>
+{:else if (post.data.is_self)}
+    <div class="media none"></div>
 {:else }
     {#if linkable}
         <a href="{post.data.url}" target="_blank" rel="noreferrer" class="media link">
@@ -57,7 +67,7 @@
     }
 
     .media iframe {
-        aspect-ratio: 1/1;
+        aspect-ratio: 16/9;
     }
 
     .media.link {
