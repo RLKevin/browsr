@@ -1,6 +1,7 @@
 export let subreddits = [
 	{ name: 'affinity', title: 'Affinity' },
 	{ name: 'botw', title: 'Breath of the Wild' },
+	{ name: 'gamedeals', title: 'Game Deals' },
 	{ name: 'harrypottergame', title: 'Harry Potter: Wizards Unite' },
 	{ name: 'homeassistant', title: 'Home Assistant' },
 	{ name: 'livestreamfails', title: 'Livestream Fails' },

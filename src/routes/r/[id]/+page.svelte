@@ -11,6 +11,7 @@
 
     let posts = [];
     let promise;
+    let loading = true;
     let after = '';
     if (posts.length === 0) {
         promise = getPosts(id).then((data) => {
@@ -25,26 +26,29 @@
         promise = getPosts(id).then((data) => {
             posts = data.data.children;
             after = data.data.after;
+            loading = false;
         });
     }
 
     onMount(() => {
         window.onscroll = function(e) {
             let scrollpercentage = (window.innerHeight + window.scrollY) / document.body.offsetHeight;
-            if (scrollpercentage > 0.9) {
+            console.log(scrollpercentage, loading);
+            if (scrollpercentage > 0.97 && !loading) {
+                loading = true;
                 fetchData();
             }
         };
     });
 
     const fetchData = async () => {
-        console.log('fetching');
         const response = await fetch(
             `https://api.reddit.com/r/${id}.json?raw_json=1&limit=10&after=${after}`
         );
         const json = await response.json();
         posts = posts.concat(json.data.children);
         after = json.data.after;
+        loading = false;
     }
 
 </script>
