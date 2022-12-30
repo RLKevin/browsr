@@ -12,7 +12,7 @@
 <!-- <div on:click={logCardInfo} class="card-info">
     log card info
 </div> -->
-<a class="card" href="/comments/{post.data.id}">
+<div class="card">
 
     <Media {post} />
 
@@ -20,7 +20,7 @@
 
     <Footer {post} />
 
-</a>
+</div>
 
 <style>
     .card {

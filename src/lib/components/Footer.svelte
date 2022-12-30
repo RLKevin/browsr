@@ -2,10 +2,10 @@
     export let post;
 </script>
 
-<div class="footer">
+<a class="footer" href="/comments/{post.data.id}">
     <span class="comments">{post.data.num_comments} comments</span>
     <span class="score">{post.data.score} points</span>
-</div>
+</a>
 
 <style>
     .footer {

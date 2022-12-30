@@ -1,11 +1,15 @@
 <script>
+    import { Lightbox } from 'svelte-lightbox';
+
     export let post;
     export let linkable = false;
 </script>
 
 {#if post.data.post_hint == 'image'}
     <div class="media {linkable ? 'full-height' : ''}">
-        <img loading="lazy" src="{post.data.url}" alt="{post.data.title}">
+        <Lightbox enableClickToClose="true" enableEscapeToClose="true" enableImageExpand="true" showCloseButton="false">
+            <img loading="lazy" src="{post.data.url}" alt="{post.data.title}">
+        </Lightbox>
     </div>
 {:else if post.data.is_video} 
     <div class="media {linkable ? 'full-height' : ''}">
