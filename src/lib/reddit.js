@@ -3,9 +3,10 @@ export let subreddits = [
 	{ name: 'botw', title: 'Breath of the Wild' },
 	{ name: 'harrypottergame', title: 'Harry Potter: Wizards Unite' },
 	{ name: 'homeassistant', title: 'Home Assistant' },
-	// { name: 'ik_ihe', title: 'ik_ihe' },
+	{ name: 'livestreamfails', title: 'Livestream Fails' },
 	{ name: 'malelivingspace', title: 'Male Living Space' },
 	{ name: 'nintendoswitch', title: 'Nintendo Switch' },
+	{ name: 'outoftheloop', title: 'Out f the Loop' },
 	{ name: 'pcgaming', title: 'PC Gaming' },
 	{ name: 'pokemon', title: 'Pokémon' },
 	{ name: 'ProgrammerHumor', title: 'Programmer Humor' },
@@ -19,6 +20,7 @@ export let subreddits = [
 	{ name: 'web_design', title: 'Web Design' },
 	{ name: 'webdev', title: 'Web Development' },
 	{ name: 'worldnews', title: 'World News' },
+	// { name: 'ik_ihe', title: 'ik_ihe' },
 ];
 
 export async function getPosts(subreddit = 'aww', after = '') {
