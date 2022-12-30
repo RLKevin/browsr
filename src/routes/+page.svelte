@@ -20,7 +20,8 @@
 
     onMount(() => {
         window.onscroll = function(e) {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            let scrollpercentage = (window.innerHeight + window.scrollY) / document.body.offsetHeight;
+            if (scrollpercentage > 0.9) {
                 fetchData();
             }
         };

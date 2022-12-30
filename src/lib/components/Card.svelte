@@ -18,7 +18,7 @@
 
     <Content {post} />
 
-    <!-- <Footer {post} /> -->
+    <Footer {post} />
 
 </a>
 
